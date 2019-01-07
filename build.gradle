@@ -1,0 +1,212 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.4'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+project(':modules:calendar') {
+    apply plugin: 'android-library'
+
+    android {
+        compileSdkVersion 28
+        buildToolsVersion '28.0.3'
+
+        defaultConfig {
+            minSdkVersion 23
+            targetSdkVersion 28
+        }
+
+        sourceSets {
+            main {
+                manifest.srcFile 'AndroidManifest.xml'
+                java.srcDirs = ['src']
+                aidl.srcDirs = ['src']
+                renderscript.srcDirs = ['src']
+                res.srcDirs = ['res']
+                assets.srcDirs = ['assets']
+            }
+        }
+
+        lintOptions {
+            abortOnError false
+        }
+    }
+}
+
+project(':modules:colorpicker') {
+    apply plugin: 'android-library'
+
+    android {
+        compileSdkVersion 28
+        buildToolsVersion '28.0.3'
+
+        defaultConfig {
+            minSdkVersion 23
+            targetSdkVersion 28
+        }
+
+        sourceSets {
+            main {
+                manifest.srcFile 'AndroidManifest.xml'
+                java.srcDirs = ['src']
+                aidl.srcDirs = ['src']
+                renderscript.srcDirs = ['src']
+                res.srcDirs = ['res']
+                assets.srcDirs = ['assets']
+            }
+        }
+    }
+}
+
+project(':modules:datetimepicker') {
+    apply plugin: 'android-library'
+
+    dependencies {
+        implementation 'com.android.support:support-v4:28.0.0'
+    }
+
+    android {
+        compileSdkVersion 28
+        buildToolsVersion '28.0.3'
+
+        defaultConfig {
+            minSdkVersion 23
+            targetSdkVersion 28
+        }
+
+        sourceSets {
+            main {
+                manifest.srcFile 'AndroidManifest.xml'
+                java.srcDirs = ['src']
+                aidl.srcDirs = ['src']
+                renderscript.srcDirs = ['src']
+                res.srcDirs = ['res']
+                assets.srcDirs = ['assets']
+            }
+        }
+
+        lintOptions {
+            abortOnError false
+        }
+    }
+}
+
+project(':modules:timezonepicker') {
+    apply plugin: 'android-library'
+
+    dependencies {
+        implementation 'com.android.support:support-v4:28.0.0'
+    }
+
+    android {
+        compileSdkVersion 28
+        buildToolsVersion '28.0.3'
+
+        defaultConfig {
+            minSdkVersion 23
+            targetSdkVersion 28
+        }
+
+        sourceSets {
+            main {
+                manifest.srcFile 'AndroidManifest.xml'
+                java.srcDirs = ['src']
+                aidl.srcDirs = ['src']
+                renderscript.srcDirs = ['src']
+                res.srcDirs = ['res']
+            }
+        }
+
+        lintOptions {
+            abortOnError false
+        }
+    }
+}
+
+project(':modules:chips') {
+    apply plugin: 'android-library'
+
+    android {
+        compileSdkVersion 28
+        buildToolsVersion '28.0.3'
+
+        defaultConfig {
+            minSdkVersion 23
+            targetSdkVersion 28
+        }
+
+        sourceSets {
+            main {
+                manifest.srcFile 'AndroidManifest.xml'
+                java.srcDirs = ['src']
+                aidl.srcDirs = ['src']
+                renderscript.srcDirs = ['src']
+                res.srcDirs = ['res']
+                assets.srcDirs = ['assets']
+            }
+        }
+
+
+        lintOptions {
+            abortOnError false
+        }
+    }
+}
+
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 28
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    productFlavors {
+        aosp {
+            flavorDimensions 'default'
+            applicationId 'com.android.calendar'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation project(':modules:calendar')
+    implementation project(':modules:colorpicker')
+    implementation project(':modules:datetimepicker')
+    implementation project(':modules:timezonepicker')
+    implementation project(':modules:chips')
+}

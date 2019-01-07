@@ -1,0 +1,15 @@
+[submodule "modules/colorpicker"]
+	path = modules/colorpicker
+	url = https://github.com/whyorean/android_frameworks_opt_colorpicker.git
+[submodule "modules/datetimepicker"]
+	path = modules/datetimepicker
+	url = https://github.com/whyorean/android_frameworks_opt_datetimepicker.git
+[submodule "modules/timezonepicker"]
+	path = modules/timezonepicker
+	url = https://github.com/whyorean/android_frameworks_opt_timezonepicker.git
+[submodule "modules/calendar"]
+	path = modules/calendar
+	url = https://github.com/whyorean/android_frameworks_opt_calendar.git
+[submodule "modules/chips"]
+	path = modules/chips
+	url = https://github.com/whyorean/android_frameworks_opt_chips.git
