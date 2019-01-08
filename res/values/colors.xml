@@ -72,7 +72,7 @@
     <color name="calendar_grid_line_highlight_color">@color/colorGrey</color>
 
     <color name="mini_month_bg_color">@color/colorWhite</color>
-    <color name="mini_month_today_outline_color">@color/colorBlack</color>
+    <color name="mini_month_today_outline_color">@color/colorAccent</color>
 
     <color name="month_day_number">@color/colorGreyDarker</color>
     <color name="month_mini_day_number">@color/colorBlack</color>
@@ -100,8 +100,8 @@
 
     <color name="calendar_visible">@color/colorBlack</color>
     <color name="calendar_hidden">@color/colorGrey</color>
-    <color name="calendar_secondary_visible">@color/colorGreyDarker</color>
-    <color name="calendar_secondary_hidden">@color/colorGrey</color>
+    <color name="calendar_secondary_visible">@color/colorGrey</color>
+    <color name="calendar_secondary_hidden">@color/colorGreyLight</color>
 
     <!-- Text color of the date in the Calendar widget -->
 
@@ -142,7 +142,7 @@
     <!-- background color for for clicked days in month view-->
     <color name="day_clicked_background_color">@color/colorAccent</color>
     <!-- background color for the past -->
-    <color name="day_past_background_color">@color/colorGreyLight</color>
+    <color name="day_past_background_color">@color/colorOffWhite</color>
 
     <!-- Event info colors -->
     <color name="event_info_headline_color">@color/colorWhite</color>

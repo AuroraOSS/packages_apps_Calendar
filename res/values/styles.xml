@@ -56,7 +56,7 @@
 
     <style name="TextAppearance.MonthView_DayLabel">
         <item name="android:textSize">@dimen/day_label_text_size</item>
-        <item name="android:paddingLeft">2dip</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/month_day_names_color</item>
     </style>
 
