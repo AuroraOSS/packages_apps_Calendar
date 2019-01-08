@@ -160,17 +160,17 @@
         <activity
             android:name=".selectcalendars.SelectVisibleCalendarsActivity"
             android:label="@string/select_visible_calendars_title"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:theme="@style/Theme.AppCompat.Light" />
 
         <activity
             android:name=".selectcalendars.SelectSyncedCalendarsMultiAccountActivity"
             android:label="@string/select_synced_calendars_title"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:theme="@style/Theme.AppCompat.Light" />
 
         <activity
             android:name="CalendarSettingsActivity"
             android:label="@string/preferences_title"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:theme="@style/CalendarTheme.WithActionBar" />
 
         <!-- Declarations for search -->
         <!-- Make all activities a searchable context -->
@@ -204,14 +204,14 @@
             android:name=".alerts.AlertActivity"
             android:excludeFromRecents="true"
             android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:theme="@style/Theme.AppCompat.Dialog" />
 
         <activity
             android:name=".alerts.QuickResponseActivity"
             android:excludeFromRecents="true"
             android:label="@string/quick_response_dialog_title"
             android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.Holo.Dialog" />
+            android:theme="@style/Theme.AppCompat.Dialog" />
 
         <receiver android:name=".alerts.AlertReceiver">
             <intent-filter>
