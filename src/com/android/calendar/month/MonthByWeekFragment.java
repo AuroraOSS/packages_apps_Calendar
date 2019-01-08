@@ -16,6 +16,7 @@
 
 package com.android.calendar.month;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.LoaderManager;
@@ -99,6 +100,7 @@ public class MonthByWeekFragment extends SimpleDayPickerFragment implements
     private boolean mShowCalendarControls;
     private boolean mIsDetached;
 
+    @SuppressLint("HandlerLeak")
     private Handler mEventDialogHandler = new Handler() {
 
         @Override

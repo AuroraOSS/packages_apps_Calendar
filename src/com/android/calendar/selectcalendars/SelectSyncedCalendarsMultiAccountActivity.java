@@ -16,6 +16,7 @@
 
 package com.android.calendar.selectcalendars;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.ExpandableListActivity;
 import android.content.AsyncQueryHandler;
@@ -32,21 +33,21 @@ import com.android.calendar.R;
 import com.android.calendar.Utils;
 
 public class SelectSyncedCalendarsMultiAccountActivity extends ExpandableListActivity
-    implements View.OnClickListener {
+        implements View.OnClickListener {
 
     private static final String TAG = "Calendar";
     private static final String EXPANDED_KEY = "is_expanded";
     private static final String ACCOUNT_UNIQUE_KEY = "ACCOUNT_KEY";
+    private static final String[] PROJECTION = new String[]{
+            Calendars._ID,
+            Calendars.ACCOUNT_TYPE,
+            Calendars.ACCOUNT_NAME,
+            Calendars.ACCOUNT_TYPE + " || " + Calendars.ACCOUNT_NAME + " AS " +
+                    ACCOUNT_UNIQUE_KEY,
+    };
     private MatrixCursor mAccountsCursor = null;
     private ExpandableListView mList;
     private SelectSyncedCalendarsMultiAccountAdapter mAdapter;
-    private static final String[] PROJECTION = new String[] {
-        Calendars._ID,
-        Calendars.ACCOUNT_TYPE,
-        Calendars.ACCOUNT_NAME,
-        Calendars.ACCOUNT_TYPE + " || " + Calendars.ACCOUNT_NAME + " AS " +
-                ACCOUNT_UNIQUE_KEY,
-    };
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -73,6 +74,7 @@ public class SelectSyncedCalendarsMultiAccountActivity extends ExpandableListAct
         }
     }
 
+    @SuppressLint("HandlerLeak")
     @Override
     protected void onResume() {
         super.onResume();
@@ -91,7 +93,7 @@ public class SelectSyncedCalendarsMultiAccountActivity extends ExpandableListAct
 
                 // TODO initialize from sharepref
                 int count = mList.getCount();
-                for(int i = 0; i < count; i++) {
+                for (int i = 0; i < count; i++) {
                     mList.expandGroup(i);
                 }
             }
@@ -126,10 +128,10 @@ public class SelectSyncedCalendarsMultiAccountActivity extends ExpandableListAct
         super.onSaveInstanceState(outState);
         boolean[] isExpanded;
         mList = getExpandableListView();
-        if(mList != null) {
+        if (mList != null) {
             int count = mList.getCount();
             isExpanded = new boolean[count];
-            for(int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++) {
                 isExpanded[i] = mList.isGroupExpanded(i);
             }
         } else {
@@ -144,11 +146,11 @@ public class SelectSyncedCalendarsMultiAccountActivity extends ExpandableListAct
         super.onRestoreInstanceState(state);
         mList = getExpandableListView();
         boolean[] isExpanded = state.getBooleanArray(EXPANDED_KEY);
-        if(mList != null && isExpanded != null && mList.getCount() >= isExpanded.length) {
-            for(int i = 0; i < isExpanded.length; i++) {
-                if(isExpanded[i] && !mList.isGroupExpanded(i)) {
+        if (mList != null && isExpanded != null && mList.getCount() >= isExpanded.length) {
+            for (int i = 0; i < isExpanded.length; i++) {
+                if (isExpanded[i] && !mList.isGroupExpanded(i)) {
                     mList.expandGroup(i);
-                } else if(!isExpanded[i] && mList.isGroupExpanded(i)){
+                } else if (!isExpanded[i] && mList.isGroupExpanded(i)) {
                     mList.collapseGroup(i);
                 }
             }

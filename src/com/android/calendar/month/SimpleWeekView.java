@@ -27,6 +27,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.text.format.DateUtils;
 import android.text.format.Time;
@@ -110,7 +111,7 @@ public class SimpleWeekView extends View {
     // affects the padding on the sides of this view
     protected int mPadding = 0;
 
-    protected Rect r = new Rect();
+    protected RectF r = new RectF();
     protected Paint p = new Paint();
     protected Paint mMonthNumPaint;
     protected Drawable mSelectedDayLine;
@@ -414,10 +415,10 @@ public class SimpleWeekView extends View {
         r.bottom = mHeight - 1;
         r.left = mPadding;
         r.right = mSelectedLeft;
-        canvas.drawRect(r, p);
+        canvas.drawRoundRect(r, 15, 15, p);
         r.left = mSelectedRight;
         r.right = mWidth - mPadding;
-        canvas.drawRect(r, p);
+        canvas.drawRoundRect(r, 15, 15, p);
     }
 
     /**
@@ -479,7 +480,7 @@ public class SimpleWeekView extends View {
             p.setStrokeWidth(MINI_TODAY_OUTLINE_WIDTH);
             p.setStyle(Style.STROKE);
             p.setColor(mTodayOutlineColor);
-            canvas.drawRect(r, p);
+            canvas.drawRoundRect(r, 15, 15, p);
         }
         if (mShowWeekNum) {
             p.setColor(mDaySeparatorColor);

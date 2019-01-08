@@ -77,7 +77,7 @@ public class SimpleWeeksAdapter extends BaseAdapter implements OnTouchListener {
 
     protected static final int WEEK_COUNT = CalendarController.MAX_CALENDAR_WEEK
             - CalendarController.MIN_CALENDAR_WEEK;
-    protected static int DEFAULT_NUM_WEEKS = 6;
+    protected static int DEFAULT_NUM_WEEKS = 5; //Show only 5 weeks ~ A month
     protected static int DEFAULT_MONTH_FOCUS = 0;
     protected static int DEFAULT_DAYS_PER_WEEK = 7;
     protected static int DEFAULT_WEEK_HEIGHT = 32;

@@ -18,17 +18,17 @@
 -->
 <resources>
 
-    <color name="colorAccent">#00ad45</color>
-    <color name="colorAccentTranslucent">#5500ad45</color>
-    <color name="colorPrimary">#FFF</color>
-    <color name="colorPrimaryDark">#EEE</color>
+    <color name="colorAccent">#19996D</color>
+    <color name="colorAccentTranslucent">#5519996D</color>
+    <color name="colorPrimary">#19996D</color>
+    <color name="colorPrimaryDark">#19996D</color>
     <color name="colorBackground">#FFF</color>
 
     <color name="colorTextPrimary">#141414</color>
     <color name="colorTextSecondary">#545454</color>
 
     <color name="colorWhite">#FFFFFF</color>
-    <color name="colorOffWhite">#F9F9F9</color>
+    <color name="colorOffWhite">#77F9F9F9</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBlackAlt">#242424</color>
     <color name="colorGrey">#999999</color>
@@ -140,7 +140,7 @@
     <!-- background color for for clicked days in month view-->
     <color name="day_clicked_background_color">@color/colorAccent</color>
     <!-- background color for the past -->
-    <color name="day_past_background_color">@color/colorOffWhite</color>
+    <color name="day_past_background_color">@color/colorWhite</color>
 
     <!-- Event info colors -->
     <color name="event_info_headline_color">@color/colorWhite</color>

@@ -20,7 +20,7 @@
     <item
         android:id="@+id/action_search"
         android:alphabeticShortcut="f"
-        android:icon="@drawable/ic_menu_search_holo_light"
+        android:icon="@drawable/ic_search"
         android:imeOptions="actionSearch"
         android:title="@string/search"
         app:actionViewClass="android.widget.SearchView"
@@ -34,6 +34,6 @@
     <item
         android:id="@+id/action_settings"
         android:alphabeticShortcut="s"
-        android:icon="@drawable/ic_menu_settings_holo_light"
+        android:icon="@drawable/ic_settings"
         android:title="@string/menu_preferences" />
 </menu>

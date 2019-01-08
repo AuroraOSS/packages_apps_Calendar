@@ -15,11 +15,6 @@
  */
 package com.android.calendar;
 
-import static android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME;
-import static android.provider.CalendarContract.EXTRA_EVENT_END_TIME;
-
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.SearchManager;
@@ -34,6 +29,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CalendarContract.Events;
 import android.provider.SearchRecentSuggestions;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
@@ -46,40 +43,22 @@ import com.android.calendar.CalendarController.EventType;
 import com.android.calendar.CalendarController.ViewType;
 import com.android.calendar.agenda.AgendaFragment;
 
-public class SearchActivity extends Activity implements CalendarController.EventHandler,
+import static android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME;
+import static android.provider.CalendarContract.EXTRA_EVENT_END_TIME;
+
+public class SearchActivity extends AppCompatActivity implements CalendarController.EventHandler,
         SearchView.OnQueryTextListener, OnActionExpandListener {
 
-    private static final String TAG = SearchActivity.class.getSimpleName();
-
-    private static final boolean DEBUG = false;
-
-    private static final int HANDLER_KEY = 0;
-
     protected static final String BUNDLE_KEY_RESTORE_TIME = "key_restore_time";
-
     protected static final String BUNDLE_KEY_RESTORE_SEARCH_QUERY =
-        "key_restore_search_query";
-
+            "key_restore_search_query";
+    private static final String TAG = SearchActivity.class.getSimpleName();
+    private static final boolean DEBUG = false;
+    private static final int HANDLER_KEY = 0;
+    private static boolean mIsMultipane;
     // display event details to the side of the event list
-   private boolean mShowEventDetailsWithAgenda;
-   private static boolean mIsMultipane;
-
+    private boolean mShowEventDetailsWithAgenda;
     private CalendarController mController;
-
-    private EventInfoFragment mEventInfoFragment;
-
-    private long mCurrentEventId = -1;
-
-    private String mQuery;
-
-    private SearchView mSearchView;
-
-    private DeleteEventHelper mDeleteEventHelper;
-
-    private Handler mHandler;
-    private BroadcastReceiver mTimeChangesReceiver;
-    private ContentResolver mContentResolver;
-
     private final ContentObserver mObserver = new ContentObserver(new Handler()) {
         @Override
         public boolean deliverSelfNotifications() {
@@ -91,7 +70,12 @@ public class SearchActivity extends Activity implements CalendarController.Event
             eventsChanged();
         }
     };
-
+    private EventInfoFragment mEventInfoFragment;
+    private long mCurrentEventId = -1;
+    private String mQuery;
+    private SearchView mSearchView;
+    private DeleteEventHelper mDeleteEventHelper;
+    private Handler mHandler;
     // runs when a timezone was changed and updates the today icon
     private final Runnable mTimeChangesUpdater = new Runnable() {
         @Override
@@ -101,6 +85,8 @@ public class SearchActivity extends Activity implements CalendarController.Event
             SearchActivity.this.invalidateOptionsMenu();
         }
     };
+    private BroadcastReceiver mTimeChangesReceiver;
+    private ContentResolver mContentResolver;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -111,7 +97,7 @@ public class SearchActivity extends Activity implements CalendarController.Event
 
         mIsMultipane = Utils.getConfigBool(this, R.bool.multiple_pane_config);
         mShowEventDetailsWithAgenda =
-            Utils.getConfigBool(this, R.bool.show_event_details_with_agenda);
+                Utils.getConfigBool(this, R.bool.show_event_details_with_agenda);
 
         setContentView(R.layout.search);
 
@@ -119,13 +105,9 @@ public class SearchActivity extends Activity implements CalendarController.Event
 
         mContentResolver = getContentResolver();
 
-        if (mIsMultipane) {
-            getActionBar().setDisplayOptions(
-                    ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
-        } else {
-            getActionBar().setDisplayOptions(0,
-                    ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_HOME);
-        }
+        ActionBar mActionBar = getSupportActionBar();
+        if (mActionBar != null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Must be the first to register because this activity can modify the
         // list of event handlers in it's handle method. This affects who the

@@ -16,13 +16,13 @@
 
 package com.android.calendar.selectcalendars;
 
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.ContentObserver;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.CalendarContract;
+import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +37,7 @@ import com.android.calendar.Utils;
 public class SelectVisibleCalendarsActivity extends AbstractCalendarActivity {
     private SelectVisibleCalendarsFragment mFragment;
     private CalendarController mController;
-
+    private ActionBar mActionBar;
     // Create an observer so that we can update the views whenever a
     // Calendar event changes.
     private final ContentObserver mObserver = new ContentObserver(new Handler()) {
@@ -48,23 +48,19 @@ public class SelectVisibleCalendarsActivity extends AbstractCalendarActivity {
 
         @Override
         public void onChange(boolean selfChange) {
-          mController.sendEvent(this, EventType.EVENTS_CHANGED, null, null, -1, ViewType.CURRENT);
+            mController.sendEvent(this, EventType.EVENTS_CHANGED, null, null, -1, ViewType.CURRENT);
         }
     };
 
     @Override
     protected void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
         setContentView(R.layout.simple_frame_layout);
-
         mController = CalendarController.getInstance(this);
         mFragment = (SelectVisibleCalendarsFragment) getFragmentManager().findFragmentById(
                 R.id.main_frame);
-
         if (mFragment == null) {
             mFragment = new SelectVisibleCalendarsFragment(R.layout.calendar_sync_item);
-
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.main_frame, mFragment);
             ft.show(mFragment);
@@ -96,8 +92,11 @@ public class SelectVisibleCalendarsActivity extends AbstractCalendarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getActionBar()
-                .setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP, ActionBar.DISPLAY_HOME_AS_UP);
+        mActionBar = getSupportActionBar();
+        if (mActionBar != null) {
+            mActionBar.setElevation(0f);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+        }
         return true;
     }
 

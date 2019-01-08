@@ -16,11 +16,6 @@
 
 package com.android.calendar.event;
 
-import static android.provider.CalendarContract.EXTRA_EVENT_ALL_DAY;
-import static android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME;
-import static android.provider.CalendarContract.EXTRA_EVENT_END_TIME;
-
-import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
@@ -39,17 +34,16 @@ import com.android.calendar.Utils;
 
 import java.util.ArrayList;
 
+import static android.provider.CalendarContract.EXTRA_EVENT_ALL_DAY;
+import static android.provider.CalendarContract.EXTRA_EVENT_BEGIN_TIME;
+import static android.provider.CalendarContract.EXTRA_EVENT_END_TIME;
+
 public class EditEventActivity extends AbstractCalendarActivity {
-    private static final String TAG = "EditEventActivity";
-
-    private static final boolean DEBUG = false;
-
-    private static final String BUNDLE_KEY_EVENT_ID = "key_event_id";
-
     public static final String EXTRA_EVENT_COLOR = "event_color";
-
     public static final String EXTRA_EVENT_REMINDERS = "reminders";
-
+    private static final String TAG = "EditEventActivity";
+    private static final boolean DEBUG = false;
+    private static final String BUNDLE_KEY_EVENT_ID = "key_event_id";
     private static boolean mIsMultipane;
 
     private EditEventFragment mEditFragment;
@@ -61,6 +55,7 @@ public class EditEventActivity extends AbstractCalendarActivity {
     private boolean mEventColorInitialized;
 
     private EventInfo mEventInfo;
+    private android.support.v7.app.ActionBar mActionBar;
 
     @Override
     protected void onCreate(Bundle icicle) {
@@ -72,23 +67,16 @@ public class EditEventActivity extends AbstractCalendarActivity {
         mEventColorInitialized = getIntent().hasExtra(EXTRA_EVENT_COLOR);
         mEventColor = getIntent().getIntExtra(EXTRA_EVENT_COLOR, -1);
 
-
+        mActionBar = getSupportActionBar();
         mEditFragment = (EditEventFragment) getFragmentManager().findFragmentById(R.id.main_frame);
 
         mIsMultipane = Utils.getConfigBool(this, R.bool.multiple_pane_config);
 
         if (mIsMultipane) {
-            getActionBar().setDisplayOptions(
-                    ActionBar.DISPLAY_SHOW_TITLE,
-                    ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_HOME
-                            | ActionBar.DISPLAY_SHOW_TITLE);
-            getActionBar().setTitle(
-                    mEventInfo.id == -1 ? R.string.event_create : R.string.event_edit);
-        }
-        else {
-            getActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                    ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_HOME|
-                    ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
+            mActionBar.setDisplayHomeAsUpEnabled(true);
+            mActionBar.setTitle(mEventInfo.id == -1 ? R.string.event_create : R.string.event_edit);
+        } else {
+            mActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
         if (mEditFragment == null) {

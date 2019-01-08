@@ -25,7 +25,6 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -50,6 +49,8 @@ import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
@@ -179,6 +180,7 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
     //BottomNavigation & ActionBar
     private ActionBar mActionBar;
     private BottomNavigationView mBottomNavigation;
+    private FloatingActionButton mFab;
 
     private QueryHandler mHandler;
     // runs every midnight/time changes and refreshes the today icon
@@ -345,6 +347,8 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         // the list of event handlers in it's handle method. This affects who
         // the rest of the handlers the controller dispatches to are.
         mController.registerFirstEventHandler(HANDLER_KEY, this);
+        mBottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mFab = (FloatingActionButton) findViewById(R.id.fab);
 
         initFragments(timeMillis, viewType, icicle);
 
@@ -353,8 +357,12 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         prefs.registerOnSharedPreferenceChangeListener(this);
 
         mContentResolver = getContentResolver();
-        mActionBar = getActionBar();
-        mBottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        mActionBar = getSupportActionBar();
+        if (mActionBar != null) {
+            mActionBar.setHomeButtonEnabled(true);
+            mActionBar.setElevation(0f);
+        }
+
         mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -381,6 +389,22 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
                         break;
                 }
                 return true;
+            }
+        });
+
+        mFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Time t = new Time();
+                t.set(mController.getTime());
+                if (t.minute > 30) {
+                    t.hour++;
+                    t.minute = 0;
+                } else if (t.minute > 0 && t.minute < 30) {
+                    t.minute = 30;
+                }
+                mController.sendEventRelatedEvent(
+                        this, EventType.CREATE_EVENT, -1, t.toMillis(true), 0, 0, 0, -1);
             }
         });
     }
@@ -793,13 +817,16 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         switch (viewType) {
             case ViewType.AGENDA:
                 frag = new AgendaFragment(timeMillis, false);
+                mBottomNavigation.setSelectedItemId(R.id.action_agenda);
                 ExtensionsFactory.getAnalyticsLogger(getBaseContext()).trackView("agenda");
                 break;
             case ViewType.DAY:
+                mBottomNavigation.setSelectedItemId(R.id.action_day);
                 frag = new DayFragment(timeMillis, 1);
                 ExtensionsFactory.getAnalyticsLogger(getBaseContext()).trackView("day");
                 break;
             case ViewType.MONTH:
+                mBottomNavigation.setSelectedItemId(R.id.action_month);
                 frag = new MonthByWeekFragment(timeMillis, false);
                 if (mShowAgendaWithMonth) {
                     secFrag = new AgendaFragment(timeMillis, false);
@@ -809,6 +836,7 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
             case ViewType.WEEK:
             default:
                 frag = new DayFragment(timeMillis, 7);
+                mBottomNavigation.setSelectedItemId(R.id.action_week);
                 ExtensionsFactory.getAnalyticsLogger(getBaseContext()).trackView("week");
                 break;
         }
