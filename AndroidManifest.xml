@@ -49,6 +49,7 @@
         android:label="@string/app_label"
         android:requiredAccountType="*"
         android:taskAffinity="android.task.calendar"
+        android:theme="@style/CalendarTheme.WithActionBar"
         android:usesCleartextTraffic="false">
 
         <meta-data
@@ -59,7 +60,6 @@
             android:name="AllInOneActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/CalendarTheme.WithActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -85,8 +85,7 @@
 
         <activity
             android:name="EventInfoActivity"
-            android:parentActivityName="com.android.calendar.AllInOneActivity"
-            android:theme="@style/CalendarTheme.WithActionBar">
+            android:parentActivityName="com.android.calendar.AllInOneActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -102,9 +101,7 @@
                 android:value="com.android.calendar.AllInOneActivity" />
         </activity>
 
-        <activity
-            android:name=".event.EditEventActivity"
-            android:theme="@style/CalendarTheme.WithActionBar" />
+        <activity android:name=".event.EditEventActivity" />
 
         <activity-alias
             android:name="EditEventActivity"
@@ -159,18 +156,15 @@
 
         <activity
             android:name=".selectcalendars.SelectVisibleCalendarsActivity"
-            android:label="@string/select_visible_calendars_title"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:label="@string/select_visible_calendars_title" />
 
         <activity
             android:name=".selectcalendars.SelectSyncedCalendarsMultiAccountActivity"
-            android:label="@string/select_synced_calendars_title"
-            android:theme="@style/Theme.AppCompat.Light" />
+            android:label="@string/select_synced_calendars_title" />
 
         <activity
             android:name="CalendarSettingsActivity"
-            android:label="@string/preferences_title"
-            android:theme="@style/CalendarTheme.WithActionBar" />
+            android:label="@string/preferences_title" />
 
         <!-- Declarations for search -->
         <!-- Make all activities a searchable context -->
@@ -183,7 +177,6 @@
             android:exported="true"
             android:label="@string/search_title"
             android:launchMode="singleTop"
-            android:theme="@style/CalendarTheme.WithActionBar"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
