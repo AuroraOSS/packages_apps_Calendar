@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2011 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2011 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,28 +13,28 @@
      limitations under the License.
 -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/agenda_general_background_color"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <view
-        class="com.android.calendar.StickyHeaderListView"
         android:id="@+id/agenda_sticky_header_list"
+        class="com.android.calendar.StickyHeaderListView"
+        android:layout_width="0px"
         android:layout_height="match_parent"
-        android:layout_marginLeft="0dip"
-        android:layout_width="0px">
+        android:layout_marginStart="0dip">
+
         <view
-            class="com.android.calendar.agenda.AgendaListView"
             android:id="@+id/agenda_events_list"
-            android:fadingEdge="none"
+            class="com.android.calendar.agenda.AgendaListView"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
+            android:fadingEdge="none" />
     </view>
+
     <FrameLayout
         android:id="@+id/agenda_event_info"
-        android:layout_height="match_parent"
         android:layout_width="0px"
-        android:background="@color/agenda_general_background_color"
-        android:layout_marginTop="0dip"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="0dip" />
 </LinearLayout>

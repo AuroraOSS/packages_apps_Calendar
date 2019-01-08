@@ -141,8 +141,6 @@ public class AgendaFragment extends Fragment implements CalendarController.Event
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-
-
         int screenWidth = mActivity.getResources().getDisplayMetrics().widthPixels;
         View v = inflater.inflate(R.layout.agenda_fragment, null);
 
@@ -326,12 +324,12 @@ public class AgendaFragment extends Fragment implements CalendarController.Event
             return;
         }
         mAgendaListView.goTo(mTime, event.id, mQuery, false,
-                ((event.extraLong & CalendarController.EXTRA_GOTO_TODAY) != 0  &&
-                        mShowEventDetailsWithAgenda) ? true : false);
+                (event.extraLong & CalendarController.EXTRA_GOTO_TODAY) != 0 &&
+                        mShowEventDetailsWithAgenda);
         AgendaAdapter.ViewHolder vh = mAgendaListView.getSelectedViewHolder();
         // Make sure that on the first time the event info is shown to recreate it
         Log.d(TAG, "selected viewholder is null: " + (vh == null));
-        showEventInfo(event, vh != null ? vh.allDay : false, mForceReplace);
+        showEventInfo(event, vh != null && vh.allDay, mForceReplace);
         mForceReplace = false;
     }
 

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2009 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2009 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,56 +13,59 @@
      limitations under the License.
 -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="7dip"
-    android:paddingLeft="4dip"
-    android:orientation="vertical">
+    android:layout_marginStart="7dip"
+    android:orientation="vertical"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dip"
-        android:orientation="horizontal"
-        android:layout_marginRight="8dip" >
+        android:layout_marginEnd="8dip"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/name"
-            android:layout_height="wrap_content"
+            style="@style/TextAppearance.EditEvent_Value"
             android:layout_width="0dip"
-            android:layout_weight="1"
-            android:textSize="16sp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:focusable="true"
             android:gravity="center_vertical"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:focusable="true"
-            style="@style/TextAppearance.EditEvent_Value" />
+            android:textSize="16sp" />
 
         <ImageButton
             android:id="@+id/contact_remove"
+            style="@style/MinusButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:paddingRight="3dip"
-            android:visibility="gone"
             android:contentDescription="@string/accessibility_remove_attendee"
-            style="@style/MinusButton" />
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:visibility="gone" />
 
         <QuickContactBadge
             android:id="@+id/badge"
-            android:layout_gravity="center_vertical"
+            style="?android:attr/quickContactBadgeStyleWindowMedium"
             android:layout_width="48dip"
             android:layout_height="48dip"
-            android:src="@drawable/ic_contact_picture"
-            style="?android:attr/quickContactBadgeStyleWindowMedium" />
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_contact_picture" />
     </LinearLayout>
 
     <View
         android:id="@+id/contact_separator"
-        android:background="?android:attr/listDivider"
-        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
-        android:layout_height="1px"
-        android:layout_width="match_parent" />
+        android:background="?android:attr/listDivider"
+        android:visibility="gone" />
 
 </LinearLayout>

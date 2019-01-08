@@ -649,9 +649,13 @@ public class MonthWeekEventsView extends SimpleWeekView {
             canvas.drawRect(r, p);
         }
         if (mHasToday) {
+            p.setStyle(Paint.Style.STROKE);
             p.setColor(mMonthBGTodayColor);
+            p.setStrokeWidth(4);
+            p.setStrokeCap(Paint.Cap.SQUARE);
             r.left = computeDayLeftPosition(mTodayIndex);
             r.right = computeDayLeftPosition(mTodayIndex + 1);
+            r.inset(5,5);
             canvas.drawRect(r, p);
         }
     }

@@ -396,7 +396,7 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         Utils.setAllowWeekForDetailView(mIsMultipane);
 
         // setContentView must be called before configureActionBar
-        setContentView(R.layout.all_in_one);
+        setContentView(R.layout.activity_main);
 
         if (mIsTabletConfig) {
             mDateRange = (TextView) findViewById(R.id.date_bar);

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,39 +16,40 @@
 -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:paddingTop="1dip"
-    android:gravity="center_vertical"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/edit_reminder_min_size">
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/edit_reminder_min_size"
+    android:orientation="horizontal"
+    android:paddingTop="1dip">
 
-    <Spinner android:id="@+id/reminder_minutes_value"
+    <Spinner
+        android:id="@+id/reminder_minutes_value"
         style="@style/TextAppearance.EditEvent_Value"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="top|left"
-        android:layout_marginRight="0dip"
         android:contentDescription="@string/accessibility_reminder_time"
-        android:entries="@array/reminder_minutes_labels"/>
+        android:entries="@array/reminder_minutes_labels"
+        android:gravity="top|start" />
 
-    <Spinner android:id="@+id/reminder_method_value"
+    <Spinner
+        android:id="@+id/reminder_method_value"
         style="@style/TextAppearance.EditEvent_Value"
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="top|left"
-        android:layout_marginRight="0dip"
         android:contentDescription="@string/accessibility_reminder_type"
-        android:entries="@array/reminder_methods_labels"/>
+        android:entries="@array/reminder_methods_labels"
+        android:gravity="top|start" />
 
-    <ImageButton android:id="@+id/reminder_remove"
+    <ImageButton
+        android:id="@+id/reminder_remove"
         style="@style/MinusButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:contentDescription="@string/accessibility_remove_reminder"
+        android:gravity="center_vertical"
 
-    />
+        />
 </LinearLayout>

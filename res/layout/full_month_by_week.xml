@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 /* Copyright 2010, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,30 +17,31 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/month"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorPrimary"
     android:fillViewport="true"
-    android:background="@null">
+    android:orientation="vertical"
+    android:weightSum="2">
 
-    <TextView android:id="@+id/month_name"
+    <TextView
+        android:id="@+id/month_name"
+        style="@style/MonthView_MiniMonthLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dip"
-        android:visibility="gone"
-        style="@style/MonthView_MiniMonthLabel" />
+        android:visibility="gone" />
 
-    <include android:id="@+id/day_names" layout="@layout/full_month_header" />
-
-     <View
-        android:background="@color/calendar_grid_line_inner_vertical_color"
-        android:layout_height="1px"
-        android:layout_width="match_parent" />
+    <include
+        android:id="@+id/day_names"
+        layout="@layout/full_month_header" />
 
     <com.android.calendar.month.MonthListView
         android:id="@android:id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:drawSelectorOnTop="false" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="false"
+        android:fadingEdge="vertical" />
 
 </LinearLayout>

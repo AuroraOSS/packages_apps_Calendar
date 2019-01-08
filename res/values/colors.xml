@@ -22,7 +22,7 @@
     <color name="colorAccentTranslucent">#5500ad45</color>
     <color name="colorPrimary">#FFF</color>
     <color name="colorPrimaryDark">#EEE</color>
-    <color name="colorBackground">#FAFAFA</color>
+    <color name="colorBackground">#FFF</color>
 
     <color name="colorTextPrimary">#141414</color>
     <color name="colorTextSecondary">#545454</color>
@@ -86,12 +86,12 @@
     <color name="month_event_extra_other_color">#4C999999</color>
     <color name="month_saturday">@color/colorSaturday</color>
     <color name="month_sunday">@color/colorSunday</color>
-    <color name="month_grid_lines">@color/colorGreyLight</color>
+    <color name="month_grid_lines">@color/colorTransparent</color>
     <color name="month_other_month_day_number">@color/colorGreyDark</color>
     <color name="month_other_bgcolor">@color/colorWhite</color>
     <color name="month_selected_week_bgcolor">@color/colorWhite</color>
-    <color name="month_today_bgcolor">@color/colorAccentTranslucent</color>
-    <color name="month_bgcolor">@color/colorOffWhite</color>
+    <color name="month_today_bgcolor">@color/colorAccent</color>
+    <color name="month_bgcolor">@color/colorWhite</color>
 
     <color name="month_dna_conflict_time_color">@color/colorGreyDarker</color>
 
@@ -103,8 +103,6 @@
     <color name="calendar_secondary_visible">@color/colorGrey</color>
     <color name="calendar_secondary_hidden">@color/colorGreyLight</color>
 
-    <!-- Text color of the date in the Calendar widget -->
-
     <color name="agenda_item_not_selected">@color/colorTransparent</color>
     <!-- Text color of declined events in agenda view -->
     <color name="agenda_item_declined_color">#66333333</color>
@@ -113,13 +111,13 @@
     <!-- Background Color of present/future events in agenda view  -->
     <color name="agenda_day_bar_background_color">@color/colorWhite</color>
     <!-- Background Color of past events in agenda view  -->
-    <color name="agenda_past_days_bar_background_color">@color/colorGreyLight</color>
+    <color name="agenda_past_days_bar_background_color">@color/colorWhite</color>
     <!-- Color of the separator between the past and the present/future in agenda view  -->
     <color name="agenda_past_present_separator_color">@color/colorGreyDarker</color>
     <!-- General background color in agenda view  -->
-    <color name="agenda_general_background_color">@color/colorGreyLight</color>
+    <color name="agenda_general_background_color">@color/colorWhite</color>
     <!-- Agenda day item text color  -->
-    <color name="agenda_day_item_text_color">@color/colorGreyDark</color>
+    <color name="agenda_day_item_text_color">@color/colorAccent</color>
     <!-- Color of the event location's text in an agenda item  -->
     <color name="agenda_item_where_text_color">@color/colorGreyDark</color>
     <!-- Color of the event location's text in an agenda item  -->

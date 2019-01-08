@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!-- Copyright (C) 2008 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,28 +15,27 @@
      limitations under the License.
 -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="16dip"
-    android:paddingBottom="16dip"
     android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeight">
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:orientation="vertical"
+    android:paddingTop="16dip"
+    android:paddingBottom="16dip">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <View
             android:id="@+id/color_square"
             android:layout_width="12dip"
             android:layout_height="12dip"
-            android:layout_gravity="top|left"
-            android:layout_marginTop="6dip"
+            android:layout_gravity="top|start"
             android:layout_marginLeft="16dip"
+            android:layout_marginTop="6dip"
             android:layout_marginRight="16dip" />
 
         <TextView
@@ -48,10 +48,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="44dip">
+        android:layout_marginStart="44dip"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/when"
@@ -67,17 +67,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="5dip"
-            android:src="@drawable/ic_repeat_dark"
+            android:layout_marginStart="5dip"
+            android:clickable="false"
             android:focusable="false"
-            android:clickable="false" />
+            android:src="@drawable/ic_repeat_dark" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/where"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="44dip"
+        android:layout_marginStart="44dip"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="14sp" />

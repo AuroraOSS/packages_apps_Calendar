@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!-- Copyright (C) 2006 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +15,14 @@
      limitations under the License.
 -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="0dip"
     android:layout_weight="1.0"
-    android:paddingTop="1dip"
     android:background="@color/day_past_background_color"
-    android:foregroundGravity="fill_horizontal|top">
+    android:foregroundGravity="fill_horizontal|top"
+    android:paddingTop="1dip">
+
     <ViewSwitcher
         android:id="@+id/switcher"
         android:layout_width="match_parent"
