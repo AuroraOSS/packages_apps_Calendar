@@ -176,13 +176,6 @@
             android:label="@string/select_synced_calendars_title"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name="CalendarSettingsActivity"
-            android:configChanges="orientation"
-            android:label="@string/preferences_title"
-            android:screenOrientation="portrait"
-            android:theme="@style/CalendarTheme.Settings" />
-
         <!-- Declarations for search -->
         <!-- Make all activities a searchable context -->
         <meta-data
@@ -222,6 +215,8 @@
             android:label="@string/quick_response_dialog_title"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.AppCompat.Dialog" />
+
+        <activity android:name=".SettingsActivity" android:theme="@style/CalendarTheme.WithActionBar"/>
 
         <receiver android:name=".alerts.AlertReceiver">
             <intent-filter>

@@ -16,7 +16,6 @@
 
 package com.android.calendar;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
@@ -29,7 +28,6 @@ import java.util.Arrays;
 
 /**
  * Fragment to facilitate editing of quick responses when emailing guests
- *
  */
 public class QuickResponseSettings extends PreferenceFragment implements OnPreferenceChangeListener {
     private static final String TAG = "QuickResponseSettings";
@@ -67,18 +65,10 @@ public class QuickResponseSettings extends PreferenceFragment implements OnPrefe
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        ((CalendarSettingsActivity) activity).hideMenuButtons();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
-        CalendarSettingsActivity activity = (CalendarSettingsActivity) getActivity();
-        if (!activity.isMultiPane()) {
-            activity.setTitle(R.string.quick_response_settings_title);
-        }
+        SettingsActivity activity = (SettingsActivity) getActivity();
+        activity.setTitle(R.string.quick_response_settings_title);
     }
 
     // Implements OnPreferenceChangeListener
