@@ -51,6 +51,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
@@ -59,6 +60,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -178,6 +180,7 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
     private Menu mOptionsMenu;
 
     //BottomNavigation & ActionBar
+    private Toolbar mToolbar;
     private ActionBar mActionBar;
     private BottomNavigationView mBottomNavigation;
     private FloatingActionButton mFab;
@@ -201,6 +204,7 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
             Utils.setMidnightUpdater(mHandler, mTimeChangesUpdater, mTimeZone);
         }
     };
+    private CalendarToolbarHandler mCalendarToolbarHandler;
     // Params for animating the controls on the right
     private LayoutParams mControlsParams;
     private LinearLayout.LayoutParams mVerticalControlsParams;
@@ -346,6 +350,13 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         mController.registerFirstEventHandler(HANDLER_KEY, this);
         mBottomNavigation = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         mFab = (FloatingActionButton) findViewById(R.id.fab);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mCalendarToolbarHandler = new CalendarToolbarHandler(this, mToolbar, viewType);
+        setSupportActionBar(mToolbar);
+        mActionBar = getSupportActionBar();
+        if (mActionBar != null) {
+            mActionBar.setDisplayShowHomeEnabled(true);
+        }
 
         initFragments(timeMillis, viewType, icicle);
 
@@ -354,11 +365,6 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         prefs.registerOnSharedPreferenceChangeListener(this);
 
         mContentResolver = getContentResolver();
-        mActionBar = getSupportActionBar();
-        if (mActionBar != null) {
-            mActionBar.setHomeButtonEnabled(true);
-            mActionBar.setElevation(0f);
-        }
 
         mBottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -538,7 +544,7 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         t.set(mController.getTime());
         mController.sendEvent(this, EventType.UPDATE_TITLE, t, t, -1, ViewType.CURRENT,
                 mController.getDateFlags(), null, null);
-
+        refreshActionbarTitle(this);
         if (mControlsMenu != null) {
             mControlsMenu.setTitle(mHideControls ? mShowString : mHideString);
         }
@@ -564,6 +570,9 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
         invalidateOptionsMenu();
 
         mCalIntentReceiver = Utils.setTimeChangesReceiver(this, mTimeChangesUpdater);
+    }
+
+    private void refreshActionbarTitle(AllInOneActivity allInOneActivity) {
     }
 
     @Override
@@ -838,6 +847,12 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
                 break;
         }
 
+        mCalendarToolbarHandler.setCurrentMainView(viewType);
+
+        if (!mIsTabletConfig) {
+            refreshActionbarTitle(timeMillis);
+        }
+
         // Show date only on tablet configurations in views different than Agenda
         if (!mIsTabletConfig) {
             mDateRange.setVisibility(View.GONE);
@@ -893,6 +908,36 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
                 Log.d(TAG, "setMainPane AllInOne=" + this + " finishing:" + this.isFinishing());
             }
             ft.commit();
+        }
+    }
+
+    private void refreshActionbarTitle(long timeMillis) {
+        mCalendarToolbarHandler.setTime(timeMillis);
+    }
+
+    private void setTitleInActionBar(EventInfo event) {
+        if (event.eventType != EventType.UPDATE_TITLE) {
+            return;
+        }
+
+        final long start = event.startTime.toMillis(false /* use isDst */);
+        final long end;
+        if (event.endTime != null) {
+            end = event.endTime.toMillis(false /* use isDst */);
+        } else {
+            end = start;
+        }
+
+        final String msg = Utils.formatDateRange(this, start, end, (int) event.extraLong);
+        CharSequence oldDate = mDateRange.getText();
+        mDateRange.setText(msg);
+        updateSecondaryTitleFields(event.selectedTime != null ? event.selectedTime.toMillis(true)
+                : start);
+        if (!TextUtils.equals(oldDate, msg)) {
+            mDateRange.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+            if (mShowWeekNum && mWeekTextView != null) {
+                mWeekTextView.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED);
+            }
         }
     }
 
@@ -1018,6 +1063,9 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
             }
             displayTime = event.selectedTime != null ? event.selectedTime.toMillis(true)
                     : event.startTime.toMillis(true);
+            if (!mIsTabletConfig) {
+                refreshActionbarTitle(displayTime);
+            }
         } else if (event.eventType == EventType.VIEW_EVENT) {
 
             // If in Agenda view and "show_event_details_with_agenda" is "true",
@@ -1082,6 +1130,11 @@ public class AllInOneActivity extends AbstractCalendarActivity implements EventH
                 }
             }
             displayTime = event.startTime.toMillis(true);
+        } else if (event.eventType == EventType.UPDATE_TITLE) {
+            setTitleInActionBar(event);
+            if (!mIsTabletConfig) {
+                refreshActionbarTitle(mController.getTime());
+            }
         }
         updateSecondaryTitleFields(displayTime);
     }
