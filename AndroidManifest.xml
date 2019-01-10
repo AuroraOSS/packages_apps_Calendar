@@ -176,6 +176,7 @@
             android:name="CalendarSettingsActivity"
             android:configChanges="orientation"
             android:label="@string/preferences_title"
+            android:theme="@style/CalendarTheme.Settings"
             android:screenOrientation="portrait" />
 
         <!-- Declarations for search -->
